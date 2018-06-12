@@ -110,19 +110,10 @@ then
     read end
     case $end in
         y|Y|yes)
-            printf "since I am bad at programming, I havent created a way to only terminate the session screens. Instead, I will terminate ALL screens. Continue? (y/n) "
-            read continue
-            case $continue in
-                y|Y|yes)
-                    printf "Killing processes....\n"
-                    killall screen
-                    sleep 3
-                    ;;
-                n|N|no)
-                    printf "I will fix this soon, I promise."
-                    exit 0
-                    ;;
-                esac
+            printf "I am still working on a way to only kill the screens you are using\n"
+            killall screen
+            sleep 3
+            ;;
         n|N|no)
             printf "Resuming screen session.....\n"
             gnome-terminal -- screen -r ARP1
