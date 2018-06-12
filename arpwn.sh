@@ -1,3 +1,4 @@
+
 #!/bin/bash
  
  
@@ -89,8 +90,8 @@ dependcheck(){
 }
  
 #revision 2 of ARP Spoof script
-#CLI Arguements and interface bypass
- 
+#setting menu prompt status
+ready=1
 #check if user is root.
 if [ $EUID -ne 0 ]
 then
@@ -106,19 +107,19 @@ dependcheck
 #background check if other sessions running
 if ps aux | grep ARPWN | grep -q SCREEN
 then
-    printf "Looks like a session is already running. Would you like to end them? No displays your current session (y/n) "
+    printf "Looks like a session is already running. Would you like to display them? No jumps to main interface (y/n) "
     read end
     case $end in
         y|Y|yes)
-            printf "I am still working on a way to only kill the screens you are using\n"
-            killall screen
-            sleep 3
+            printf "Resumiung screen session...\n"
+            gnome-terminal --screen -r ARPWN1
+            gonme-terminal --screen -r ARPWN2
+            exit 0
             ;;
         n|N|no)
-            printf "Resuming screen session.....\n"
-            gnome-terminal -- screen -r ARP1
-            gnome-terminal -- screen -r ARP2
-            exit 0
+            prinf "Configuring interface...\n"
+            ready=3
+            sleep 2
             ;;
     esac
 else
@@ -136,8 +137,6 @@ else
 fi
  
 #main interface
-#killall screen
-ready=1
 while true
 do
 clear
